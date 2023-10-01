@@ -263,7 +263,7 @@ public:
 	};
 	static const char *const RegToStr[REG_TOTAL_NUMBER_OF_REGISTERS];
 
-	class SegmentProperty
+	class alignas(8) SegmentProperty
 	{
 	public:
 		uint32_t baseLinearAddr;
@@ -359,7 +359,7 @@ public:
 		TSS286_DS=40,
 		TSS286_LDTR=42,
 	};
-	class TaskRegister : public SegmentRegister
+	class alignas(8) TaskRegister : public SegmentRegister
 	{
 	public:
 		unsigned int attrib;  // Should it keep attribute?
@@ -436,7 +436,7 @@ public:
 	*/
 	FarPointer TranslateFarPointer(FarPointer ptr) const;
 
-	class OperandValueBase
+	class alignas(8) OperandValueBase
 	{
 	public:
 		enum
@@ -595,6 +595,7 @@ public:
 		unsigned int FADD_m32real(i486DXCommon &cpu,const unsigned char byteData[]);
 		unsigned int FADD64(i486DXCommon &cpu,const unsigned char byteData[]);
 		unsigned int FADD_ST_STi(i486DXCommon &cpu,int i);
+		unsigned int FADD_STi_ST(i486DXCommon &cpu, int i);
 		unsigned int FADDP_STi_ST(i486DXCommon &cpu,int i);
 		unsigned int FIADD_m16int(i486DXCommon &cpu,const unsigned char byteData[]);
 		unsigned int FBLD(i486DXCommon &cpu,const unsigned char byteData[]);
@@ -632,11 +633,13 @@ public:
 		unsigned int FLD1(i486DXCommon &cpu);
 		unsigned int FLDL2T(i486DXCommon &cpu);
 		unsigned int FLDL2E(i486DXCommon &cpu);
+		unsigned int FLDLG2(i486DXCommon& cpu);
 		unsigned int FLDLN2(i486DXCommon &cpu);
 		unsigned int FLDPI(i486DXCommon &cpu);
 		unsigned int FLDZ(i486DXCommon &cpu);
 		unsigned int FMULP(i486DXCommon &cpu,int i);
 		unsigned int FMUL_ST_STi(i486DXCommon &cpu,int i);
+		unsigned int FMUL_STi_ST(i486DXCommon &cpu,int i);
 		unsigned int FMUL_m32real(i486DXCommon &cpu,const unsigned char byteData[]);
 		unsigned int FMUL_m64real(i486DXCommon &cpu,const unsigned char byteData[]);
 		unsigned int FIMUL_m16int(i486DXCommon &cpu,const unsigned char byteData[]);
@@ -650,6 +653,7 @@ public:
 		std::vector <uint8_t> FSAVE(const i486DXCommon &cpu,unsigned int operandSize) const;
 		std::vector <uint8_t> FNSTENV(const i486DXCommon &cpu,unsigned int operandSize) const;
 		unsigned int PopulateFPUEnv(uint8_t *data,unsigned int operandSize,bool isInRealMode) const;
+		unsigned int FFREE(i486DXCommon& cpu, int i);
 		unsigned int FSCALE(i486DXCommon &cpu);
 		unsigned int FSIN(i486DXCommon &cpu);
 		unsigned int FSINCOS(i486DXCommon &cpu);
@@ -673,7 +677,7 @@ public:
 		unsigned int FYL2XP1(i486DXCommon &cpu);
 	};
 
-	class InterruptDescriptor : public FarPointer
+	class alignas(8) InterruptDescriptor : public FarPointer
 	{
 	public:
 		unsigned short flags;
@@ -687,7 +691,7 @@ public:
 		}
 	};
 
-	class PageTableEntry
+	class alignas(8)  PageTableEntry
 	{
 	public:
 		uint32_t dir,table;
@@ -1069,7 +1073,7 @@ public:
 
 	class Operand;
 
-	class Instruction
+	class alignas(8) Instruction
 	{
 	public:
 		// Bytes cleared in Clear() >>
@@ -1252,7 +1256,7 @@ public:
 		OPER_TEST6,
 		OPER_TEST7,
 	};
-	class Operand
+	class alignas(8) Operand
 	{
 	public:
 		unsigned char operandType,indexShift; // Hopefully cleared in Clear instruction with one instruction.
