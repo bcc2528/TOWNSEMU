@@ -1129,6 +1129,22 @@ bool FMTownsCommon::GetEleVolCDRightEN(void) const
 {
 	return state.eleVol[TOWNS_ELEVOL_FOR_CD][TOWNS_ELEVOL_CD_RIGHT].EN;
 }
+bool FMTownsCommon::GetEleVolCDLeftC32(void) const
+{
+	return state.eleVol[TOWNS_ELEVOL_FOR_CD][TOWNS_ELEVOL_CD_LEFT].C32;
+}
+bool FMTownsCommon::GetEleVolCDRightC32(void) const
+{
+	return state.eleVol[TOWNS_ELEVOL_FOR_CD][TOWNS_ELEVOL_CD_RIGHT].C32;
+}
+bool FMTownsCommon::GetEleVolCDLeftC0(void) const
+{
+	return state.eleVol[TOWNS_ELEVOL_FOR_CD][TOWNS_ELEVOL_CD_LEFT].C0;
+}
+bool FMTownsCommon::GetEleVolCDRightC0(void) const
+{
+	return state.eleVol[TOWNS_ELEVOL_FOR_CD][TOWNS_ELEVOL_CD_RIGHT].C0;
+}
 unsigned int FMTownsCommon::GetEleVolCDLeft(void) const
 {
 	return state.eleVol[TOWNS_ELEVOL_FOR_CD][TOWNS_ELEVOL_CD_LEFT].vol;
